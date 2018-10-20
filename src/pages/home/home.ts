@@ -29,7 +29,7 @@ export class HomePage {
      */
 
     for(let i = 0; i<9; i++) {
-      this.moleHoles.push(new MoleHole(i, /*Pass the observer created to the new MoleHoles*/))
+      this.moleHoles.push(new MoleHole(i, this.timerObserver/*Pass the observer created to the new MoleHoles*/))
     }
 
     let timerUpdate = Observable.create(observer => {
@@ -99,10 +99,17 @@ export class HomePage {
 
   stateToClass(state: number) {
     switch(state) {
-      /**
-       * What should this function do?
-       * Hint: Look in the home.scss file
-       */
+      case 1: {
+        return "out";
+      }
+
+      case 2: {
+        return "hit";
+      }
+
+      default: {
+        return "hid";
+      }
     }
 }
 
