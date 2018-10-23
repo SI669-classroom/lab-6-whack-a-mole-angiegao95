@@ -43,7 +43,7 @@ export class LeaderboardPage {
 
         res.push({
           score: this.score,
-          time: new Date().getDate()
+          time: new Date()
         })
 
         console.log(res);
