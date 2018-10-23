@@ -15,11 +15,13 @@ export class HomePage {
   gameTimer: any;
   timeLeft: number = 0;
   timerObserver: any;
-  score: 0;
+  scoreObserver: any;
+  score: number = 0;
 
 
   constructor(public navCtrl: NavController) {
 
+    
     /**
      * Create an observer to be passed to the new MoleHoles
      */
@@ -31,6 +33,14 @@ export class HomePage {
     for(let i = 0; i<9; i++) {
       this.moleHoles.push(new MoleHole(i, this.timerObserver/*Pass the observer created to the new MoleHoles*/))
     }
+
+    let scoreUpdate = Observable.create(observer => {
+      this.scoreObserver = observer;
+    });
+
+    scoreUpdate.subscribe(val => {
+      this.score += 1;
+    });
 
     let timerUpdate = Observable.create(observer => {
       this.timerObserver = observer;
@@ -72,6 +82,7 @@ export class HomePage {
     clearInterval(this.gameDriver);
     clearInterval(this.gameTimer);
     this.timerObserver.next(0);
+    this.scoreObserver.next(0);
   }
 
   saveScore() {
@@ -91,6 +102,7 @@ export class HomePage {
     const success = hole.hit();
     if(success) {
       this.showHitMessage = true;
+      this.scoreObserver.next();
       setTimeout(() => {
         this.showHitMessage = false;
       }, 300);

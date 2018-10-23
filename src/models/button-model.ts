@@ -35,7 +35,7 @@ export class MoleHole {
         if(this.moleState === 1) {
             this.moleState = 2;
             console.log("hit ", this.moleState);
-            this.observer.next(true);
+            //this.observer.next(true);
             this.nativeAudio.play('squish');
             let that = this;
             setTimeout(function(){
